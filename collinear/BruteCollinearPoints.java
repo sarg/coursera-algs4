@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.LinkedStack;
 
+import java.util.Arrays;
+
 /**
  * Brute force. Write a program BruteCollinearPoints.java that examines 4
  * points at a time and checks whether they all lie on the same line segment,
@@ -18,6 +20,9 @@ public class BruteCollinearPoints {
             Point p = points[i];
             for (int j = i + 1; j < points.length; j++) {
                 Point q = points[j];
+                if (p == q)
+                    throw new IllegalArgumentException();
+
                 double slope = p.slopeTo(q);
                 for (int k = j + 1; k < points.length; k++) {
                     Point r = points[k];
@@ -58,6 +63,10 @@ public class BruteCollinearPoints {
 
     // the line segments
     public LineSegment[] segments() {
-        return segments;
+        LineSegment[] sgl = new LineSegment[segments.length];
+        for (int i = 0; i < segments.length; i++) {
+            sgl[i] = segments[i];
+        }
+        return sgl;
     }
 }

@@ -9,11 +9,16 @@ public class FastCollinearPoints {
         Point[][] segmentList = new Point[N][1];
         int segmentCount = 0;
 
-        Arrays.sort(points);
         Point[] sorted = new Point[N];
         for (int i = 0; i < N; i++) {
             sorted[i] = points[i];
-            segmentList[i][0] = points[i];
+        }
+        Arrays.sort(sorted);
+        for (int i = 0; i < N; i++) {
+            if (i > 0 && sorted[i].compareTo(sorted[i - 1]) == 0)
+                throw new IllegalArgumentException();
+
+            segmentList[i][0] = sorted[i];
         }
 
         for (int i = 0; i < N; i++) {
@@ -21,9 +26,10 @@ public class FastCollinearPoints {
             Arrays.sort(sorted, p.slopeOrder());
 
             int startIdx = 0;
-            for (int j = 1; j < N; j++) {
-                if (p.slopeTo(sorted[j]) == p.slopeTo(sorted[startIdx]))
-                    if (j != N - 1) continue;
+            for (int j = 1; j < N + 1; j++) {
+                if (j < N
+                        && p.slopeTo(sorted[j]) == p.slopeTo(sorted[startIdx]))
+                    continue;
 
                 if (j - startIdx >= 3) {
                     Arrays.sort(sorted, startIdx, j);
@@ -62,12 +68,12 @@ public class FastCollinearPoints {
         while (lo <= hi) {
             // Key is in a[lo..hi] or not present.
             int mid = lo + (hi - lo) / 2;
-            if      (p.compareTo(points[mid][0]) < 0) hi = mid - 1;
+            if (p.compareTo(points[mid][0]) < 0) hi = mid - 1;
             else if (p.compareTo(points[mid][0]) > 0) lo = mid + 1;
             else {
                 points[mid] = insertNewSegment(points[mid], q);
 
-                return points[mid][points[mid].length-1] == null ? 0 : 1;
+                return points[mid][points[mid].length - 1] == null ? 0 : 1;
             }
         }
 
@@ -95,7 +101,7 @@ public class FastCollinearPoints {
         }
 
         if (!noAdd)
-            newP[newP.length-1] = p;
+            newP[newP.length - 1] = p;
 
         return newP;
     }
@@ -107,6 +113,10 @@ public class FastCollinearPoints {
 
     // the line segments
     public LineSegment[] segments() {
-        return segments;
+        LineSegment[] sgl = new LineSegment[segments.length];
+        for (int i = 0; i < segments.length; i++) {
+            sgl[i] = segments[i];
+        }
+        return sgl;
     }
 }
