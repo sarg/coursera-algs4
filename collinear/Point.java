@@ -10,9 +10,9 @@
  * ****************************************************************************
  */
 
-import java.util.Comparator;
-
 import edu.princeton.cs.algs4.StdDraw;
+
+import java.util.Comparator;
 
 public class Point implements Comparable<Point> {
 
@@ -67,7 +67,10 @@ public class Point implements Comparable<Point> {
                     ? Double.NEGATIVE_INFINITY
                     : Double.POSITIVE_INFINITY;
 
-        return (that.y - y) / (that.x - x);
+        if (that.y == y)
+            return +0.0;
+
+        return 1.0 * (that.y - y) / (that.x - x);
     }
 
     /**
