@@ -20,7 +20,7 @@ public class BruteCollinearPoints {
             Point p = points[i];
             for (int j = i + 1; j < points.length; j++) {
                 Point q = points[j];
-                if (p == q)
+                if (p.compareTo(q) == 0)
                     throw new IllegalArgumentException();
 
                 double slope = p.slopeTo(q);
