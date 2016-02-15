@@ -1,15 +1,7 @@
 import java.util.Arrays;
 
 public class FastCollinearPoints {
-    LineSegment[] segments;
-
-    private Point min(Point p1, Point p2) {
-        return p1.compareTo(p2) < 0 ? p1 : p2;
-    }
-
-    private Point max(Point p1, Point p2) {
-        return p1.compareTo(p2) > 0 ? p1 : p2;
-    }
+    private LineSegment[] segments;
 
     // finds all line segments containing 4 points
     public FastCollinearPoints(Point[] points) {
@@ -54,6 +46,14 @@ public class FastCollinearPoints {
                     segments[j++] = new LineSegment(p[0], p[i]);
             }
         }
+    }
+
+    private Point min(Point p1, Point p2) {
+        return p1.compareTo(p2) < 0 ? p1 : p2;
+    }
+
+    private Point max(Point p1, Point p2) {
+        return p1.compareTo(p2) > 0 ? p1 : p2;
     }
 
     private int newSegment(Point[][] points, Point p, Point q) {
