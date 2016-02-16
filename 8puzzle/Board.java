@@ -3,10 +3,10 @@ import edu.princeton.cs.algs4.LinkedStack;
 import java.util.Arrays;
 
 public class Board {
-    final private int emptyIdx;
-    final private int[] board;
-    final private int N;
-    final private boolean goal;
+    private final int emptyIdx;
+    private final int[] board;
+    private final int N;
+    private final boolean goal;
 
     // construct a board from an N-by-N array of blocks (where blocks[i][j] = block in row i, column j)
     public Board(int[][] blocks) {
@@ -33,13 +33,20 @@ public class Board {
         goal = isGoal;
     }
 
+    private static int abs(int j) {
+        if (j < 0)
+            return -j;
+        else
+            return j;
+    }
+
     // board dimension N
     public int dimension() {
         return N;
     }
 
     private boolean isBlockMisplaced(int c) {
-        return c != emptyIdx && board[c] - c != 1;
+        return board[c] != 0 && board[c] - c != 1;
     }
 
     // number of blocks out of place
@@ -52,15 +59,11 @@ public class Board {
         return hamming;
     }
 
-    private static int abs(int j) {
-        return j < 0 ? -j : j;
-    }
-
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
         int manhattan = 0;
         for (int i = 0; i < board.length; i++) {
-            if (i == emptyIdx)
+            if (board[i] == 0)
                 continue;
 
             int r = (board[i] - 1) / N;

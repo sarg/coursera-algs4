@@ -20,10 +20,10 @@ public class BoardTest {
     @Test
     public void testIsGoal() throws Exception {
         // create initial board from file
-        Board goalBoard = getBoard("puzzle00.txt");
-        assertTrue(goalBoard.isGoal());
+        Board goalBoard = getBoard("puzzle4x4-00.txt");
         assertEquals(0, goalBoard.manhattan());
         assertEquals(0, goalBoard.hamming());
+        assertTrue(goalBoard.isGoal());
     }
 
     @Test

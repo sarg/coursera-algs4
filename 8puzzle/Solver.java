@@ -3,9 +3,9 @@ import edu.princeton.cs.algs4.MinPQ;
 
 public class Solver {
     private static class SolveStep implements Comparable<SolveStep> {
-        final private int step;
-        final private Board board;
-        final private SolveStep prev;
+        private final int step;
+        private final Board board;
+        private final SolveStep prev;
 
         public SolveStep(int step, Board board, SolveStep prev) {
             this.step = step;
