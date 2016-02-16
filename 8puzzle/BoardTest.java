@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -23,6 +24,23 @@ public class BoardTest {
         assertTrue(goalBoard.isGoal());
         assertEquals(0, goalBoard.manhattan());
         assertEquals(0, goalBoard.hamming());
+    }
+
+    @Test
+    public void test() throws Exception {
+
+        Solver solver = new Solver(getBoard("puzzle3x3-unsolvable.txt"));
+
+        // print solution to standard output
+        if (!solver.isSolvable())
+            StdOut.println("No solution possible");
+        else {
+            StdOut.println("Minimum number of moves = " + solver.moves());
+            for (Board board : solver.solution())
+                StdOut.println(board);
+        }
+
+
     }
 
     private Board getBoard(String name) {

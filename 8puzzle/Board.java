@@ -84,12 +84,13 @@ public class Board {
         board[i] = board[j];
         board[j] = tmp;
 
-        goal = manhattan() == 0;
         if (board[i] == 0)
             emptyIdx = i;
         else if (board[j] == 0)
             emptyIdx = j;
         else emptyIdx = from.emptyIdx;
+
+        goal = manhattan() == 0;
     }
 
     // a board that is obtained by exchanging any pair of blocks
@@ -131,6 +132,7 @@ public class Board {
     // string representation of this board (in the output format specified below)
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(N).append("\n");
 
         String width = "% " + (log10(board.length) + 1) + "d";
 
