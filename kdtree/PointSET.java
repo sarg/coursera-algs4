@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.*;
 import java.util.Iterator;
 
 public class PointSET {
-    SET<Point2D> pointSet;
+    private SET<Point2D> pointSet;
 
     // construct an empty set of points
     public PointSET() {
@@ -33,7 +33,7 @@ public class PointSET {
     // draw all points to standard draw
     public void draw() {
         for (Point2D p : pointSet) {
-            StdDraw.circle(p.x(), p.y(), 10);
+            p.draw();
         }
     }
 
@@ -50,20 +50,18 @@ public class PointSET {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D from) {
-        if (size() == 0)
+        if (isEmpty())
             return null;
 
-        Point2D minDistPoint = null;
-        double min = 0;
         Iterator<Point2D> i = pointSet.iterator();
+        Point2D minDistPoint = i.next();
+        double min = minDistPoint.distanceSquaredTo(from);
         while (i.hasNext()) {
             Point2D cur = i.next();
-            if (cur.compareTo(from) != 0) {
-                double d = cur.distanceSquaredTo(from);
-                if (minDistPoint == null || min < d) {
-                    min = d;
-                    minDistPoint = cur;
-                }
+            double d = cur.distanceSquaredTo(from);
+            if (min > d) {
+                min = d;
+                minDistPoint = cur;
             }
         }
 
